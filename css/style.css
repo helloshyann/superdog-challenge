@@ -1,0 +1,221 @@
+/* COLOR SCHEME
+Pink Primary - #f95779
+Pink Secondary - #ffb4c4
+Yellow Primary - #f9c910
+Yellow Secondary - #fdedaf
+Green Primary - #44d7b6
+Green Secondary - #adeedf
+Purple Primary - #6c6fe5
+Purple Secondary - #bfc1fe
+Peach Primary - #f67b50
+Peach Secondary - #ffbba3
+Sky Primary - #7fdee3
+Sky Secondary - #cff9fb
+White - #f9f9ff 
+Black - #333333
+Shadow - #454360 */
+
+@font-face {
+    font-family: "lemonmilk";
+    src: url('/css/fonts/LEMONMILK-Light.ttf');
+}
+
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: url('/css/fonts/LouisGeorge.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: #f95779;
+    --secondary-color: #ffb4c4;
+    --dark-color: #333;
+    --white-color: #f9f9ff;
+}
+
+body {
+    color: #5E5C7F;
+    background-color: #F9F9FF;
+    font-family: LouisGeorge, sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+
+main>.container {
+    padding: 60px 15px 0;
+}
+
+#content {
+    min-height: 90vh;
+}
+
+.sticky-nav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.sticky-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+nav {
+    font-family: "lemonmilk";
+    background-color: var(--primary-color);
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+footer .social>a {
+    color: var(--white-color);
+}
+
+footer .social>a:hover {
+    opacity: .9;
+    color: var(--secondary-color);
+}
+
+.bg-header {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.code-box {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.card-header {
+  background-color: var(--secondary-color);
+}
+
+.techicon {
+    color: var(--primary-color) ;
+}
+.techicon:hover {
+    color: var(--dark-color);
+}
+
+.checklist>li i {
+    color: var(--secondary-color);
+}
+
+h1, h2, h4, h5, h6 {
+    color: #454360;
+    font-family: "lemonmilk", sans-serif !important;
+    font-weight: 700;
+}
+
+h3 {
+    font-family: url('/css/fonts/LouisGeorge.ttf') !important;
+}
+  
+
+.btn {
+    color: var(--white-color);
+    background-color:var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+.btn:hover {
+    color: var(--white-color);
+    background-color:var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+.logo {
+    max-height: 450px;
+}
+
+/* Pulse Grow */
+@-webkit-keyframes hvr-pulse-grow {
+    to {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+  }
+  @keyframes hvr-pulse-grow {
+    to {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+  }
+  .hvr-pulse-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+  .hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {
+    -webkit-animation-name: hvr-pulse-grow;
+    animation-name: hvr-pulse-grow;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+  }
+  
+  /* Float Shadow */
+  .hvr-float-shadow {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      position: relative;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+    }
+    .hvr-float-shadow:before {
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+      content: '';
+      top: 100%;
+      left: 5%;
+      height: 10px;
+      width: 90%;
+      opacity: 0;
+      background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+      /* W3C */
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: transform, opacity;
+      transition-property: transform, opacity;
+    }
+    .hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+      -webkit-transform: translateY(-5px);
+      transform: translateY(-5px);
+      /* move the element up by 5px */
+    }
+    .hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+      opacity: 1;
+      -webkit-transform: translateY(5px);
+      transform: translateY(5px);
+      /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+    }
