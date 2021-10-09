@@ -75,7 +75,7 @@
         <div class="container px-5 my-5">
             <div class="card text-center p-3">
                 <h1 class="fw-bolder animate__animated animate__bounceIn">View the Code</h1>
-                <p class="lead fw-normal text-muted mb-0">A simple way to view how this program was written.</p>
+                <p class="lead fw-normal text-muted mb-0">A simple way to see how this program was written.</p>
             </div>
 
             <hr>
@@ -83,24 +83,83 @@
             <div class="row row-cols-1 gx-5">
                 <!-- Code Accordion 1-->
                 <div class="col col-md-8">                   
-                    <h2 class="fw-bolder mb-3">JavaScript, HTML, & CSS</h2>
+                    <h2 class="fw-bolder mb-3">JavaScript Functions</h2>
                     <div class="accordion mb-5" id="accordionExample">
                         <div class="accordion-item">
-                            <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">JavaScript</button></h3>
+                            <h3 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                View the array of event objects
+                            </button></h3>
                             <div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     
                                     <pre class="line-numbers">
                                         <code class="language-javascript">
-                                            //Get starting values from the DOM
-                                            //Controller function
-                                            function displayMessage(){
-                                                let msg = "";
                                             
-                                                msg = document.getElementById("message").value;
+                                            let events = [{
+                                                event: "ComicCon",
+                                                city: "New York",
+                                                state: "New York",
+                                                attendance: 240000,
+                                                date: "06/01/2017",
+                                              },
+                                              {
+                                                event: "ComicCon",
+                                                city: "New York",
+                                                state: "New York",
+                                                attendance: 250000,
+                                                date: "06/01/2018",
+                                              },
+                                              {
+                                                event: "ComicCon",
+                                                city: "New York",
+                                                state: "New York",
+                                                attendance: 257000,
+                                                date: "06/01/2019",
+                                              },
+                                              {
+                                                event: "ComicCon",
+                                                city: "San Diego",
+                                                state: "California",
+                                                attendance: 130000,
+                                                date: "06/01/2017",
+                                              },
+                                              {
+                                                event: "ComicCon",
+                                                city: "San Diego",
+                                                state: "California",
+                                                attendance: 140000,
+                                                date: "06/01/2018",
+                                              },
+                                              {
+                                                event: "ComicCon",
+                                                city: "San Diego",
+                                                state: "California",
+                                                attendance: 150000,
+                                                date: "06/01/2019",
+                                              },
+                                              {
+                                                event: "HeroesCon",
+                                                city: "Charlotte",
+                                                state: "North Carolina",
+                                                attendance: 40000,
+                                                date: "06/01/2017",
+                                              },
+                                              {
+                                                event: "HeroesCon",
+                                                city: "Charlotte",
+                                                state: "North Carolina",
+                                                attendance: 45000,
+                                                date: "06/01/2018",
+                                              },
+                                              {
+                                                event: "HeroesCon",
+                                                city: "Charlotte",
+                                                state: "North Carolina",
+                                                attendance: 50000,
+                                                date: "06/01/2019",
+                                              },
+                                            ];
                                             
-                                                Swal.fire(msg);
-                                            }
                                             
                                         </code>
                                     </pre>
@@ -109,20 +168,56 @@
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h3 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">HTML 5</button></h3>
+                            <h3 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                function buildDropDown()
+                            </button></h3>
                             <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     
                                     <pre class="line-numbers">
                                         <code class="language-javascript">
-                                            //Get starting values from the DOM
-                                            //Controller function
-                                            function displayMessage(){
-                                                let msg = "";
                                             
-                                                msg = document.getElementById("message").value;
-                                            
-                                                Swal.fire(msg);
+                                            // Build a dropdown of distinct cities
+                                            function buildDropDown(){
+
+                                                let eventDD = document.getElementById("eventDropDown");
+                                                // Clear out the drop down
+                                                eventDD.innerHTML = "";
+                                                // Get the template
+                                                let ddTemplate = document.getElementById("cityDD-template");
+
+                                                let currentEvents = JSON.parse(localStorage.getItem("eventData")) || events;
+
+                                                // Get unique values from the array 
+                                                let distinctEvents = [...new Set(currentEvents.map((event) => event.city))];
+
+                                                // Use the importNode method to make a copy of the HTML from the node
+                                                let ddItemNode = document.importNode(ddTemplate.content, true);
+                                                
+                                                // Use querySelector methods to select the anchor tag element within the node to modify
+                                                let ddItem = ddItemNode.querySelector("a");
+                                                
+                                                // Use setAttribute method to add a new attribute to the HTML called data string, and set value to "All"
+                                                ddItem.setAttribute("data-string", "All");
+                                                
+                                                // Use textContent method to insert "All" between the opening and closing anchor tag
+                                                ddItem.textContent = "All";                                                
+                                                
+                                                eventDD.appendChild(ddItemNode);
+
+                                                // Loop over each iteration of the mapped cities from the Set
+                                                // and add the cities to the drop down
+                                                for (let i = 0; i < distinctEvents.length; i++) {
+
+                                                ddItemNode = document.importNode(ddTemplate.content, true);
+                                                ddItem = ddItemNode.querySelector("a");
+                                                ddItem.setAttribute("data-string", distinctEvents[i]);
+                                                ddItem.textContent = distinctEvents[i];
+                                                eventDD.appendChild(ddItemNode);
+                                                }
+
+                                                displayStats(currentEvents);
+                                                displayData();
                                             }
                                             
                                         </code>
@@ -132,20 +227,173 @@
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h3 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">CSS 3</button></h3>
+                            <h3 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                function getEvents()
+                            </button></h3>
                             <div class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     
                                     <pre class="line-numbers">
                                         <code class="language-javascript">
-                                            //Get starting values from the DOM
-                                            //Controller function
-                                            function displayMessage(){
-                                                let msg = "";
                                             
-                                                msg = document.getElementById("message").value;
+                                            // Get the events for the selected city
+                                            function getEvents(ddElement){
+
+                                            let cityName = ddElement.getAttribute("data-string");    
+                                            let currentEvents = JSON.parse(localStorage.getItem("eventData")) || events;
+                                            let filteredEvents = currentEvents;
+
+                                            document.getElementById("statsHeader").innerHTML = `Stats for ${cityName}`;
                                             
-                                                Swal.fire(msg);
+                                            if (cityName != "All"){
+                                                // Filter an array
+                                                filteredEvents = currentEvents.filter(function (event) {
+                                                if (event.city == cityName){
+                                                    return event;
+                                                }
+                                                })
+                                            }
+                                            
+                                            displayStats(filteredEvents);
+
+                                            }
+                                            
+                                        </code>
+                                    </pre>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="headingFour"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                function displayStats()
+                            </button></h3>
+                            <div class="accordion-collapse collapse" id="collapseFour" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    
+                                    <pre class="line-numbers">
+                                        <code class="language-javascript">
+                                            
+                                            // Display stats for the filtered events
+                                            function displayStats(filteredEvents){
+
+                                            let total = 0;
+                                            let average = 0;
+                                            let most = 0;
+                                            let least = -1;
+
+                                            let currentAttendance = 0;
+
+                                            for (let i = 0; i < filteredEvents.length; i++) {
+                                                
+                                                currentAttendance = filteredEvents[i].attendance;
+                                                total += currentAttendance;
+
+                                                if (most < currentAttendance){
+                                                most = currentAttendance;
+                                                }
+
+                                                if (least > currentAttendance || least < 0){
+                                                least = currentAttendance;
+                                                }    
+                                            }
+
+                                            // Calculate the average
+                                            average = total / filteredEvents.length;
+
+                                            document.getElementById("total").innerHTML = total.toLocaleString();
+                                            document.getElementById("average").innerHTML = average.toLocaleString(
+                                                undefined, {
+                                                minimumFractionDigits: 0,
+                                                maximumFractionDigits: 0
+                                                }
+                                            );
+                                            document.getElementById("most").innerHTML = most.toLocaleString();
+                                            document.getElementById("least").innerHTML = least.toLocaleString();
+
+                                            }
+                                            
+                                        </code>
+                                    </pre>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="headingFive"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                function displayData()
+                            </button></h3>
+                            <div class="accordion-collapse collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    
+                                    <pre class="line-numbers">
+                                        <code class="language-javascript">
+                                            
+                                            // Display data in data tabler
+                                            function displayData(){
+                                            let template = document.getElementById("eventData-template");
+                                            let eventBody = document.getElementById("eventBody");
+
+                                            eventBody.innerHTML = "";
+
+                                            let currentEvents = JSON.parse(localStorage.getItem("eventData")) || events;
+
+                                            for (let i = 0; i < currentEvents.length; i++) {
+                                                
+                                                let eventRow = document.importNode(template.content, true);
+                                                let eventCols = eventRow.querySelectorAll("td");
+
+                                                eventCols[0].textContent = currentEvents[i].event;
+                                                eventCols[1].textContent = currentEvents[i].city;
+                                                eventCols[2].textContent = currentEvents[i].state;
+                                                eventCols[3].textContent = currentEvents[i].attendance;
+                                                eventCols[4].textContent = new Date (
+                                                currentEvents[i].date
+                                                ).toLocaleDateString();
+                                                
+                                                eventBody.appendChild(eventRow);    
+                                            }
+                                            }
+                                            
+                                        </code>
+                                    </pre>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="headingSix"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                function saveData()
+                            </button></h3>
+                            <div class="accordion-collapse collapse" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    
+                                    <pre class="line-numbers">
+                                        <code class="language-javascript">
+                                            
+                                            //Save event data to local storage
+                                            function saveData() {
+                                            let currentEvents = JSON.parse(localStorage.getItem("eventData")) || events;
+                                            let stateSelect = document.getElementById("addEventState");
+                                            let eventDate = document.getElementById("addDate").value;
+                                            let eventDate2 = `${eventDate} 00:00`;
+
+                                            let newEvent = {
+                                                event: document.getElementById("addEventName").value,
+                                                city: document.getElementById("addCity").value,
+                                                state: stateSelect.options[stateSelect.selectedIndex].text,
+                                                attendance: parseInt(document.getElementById("addAttendance").value, 10),
+                                                date: new Date(eventDate2).toLocaleDateString(),
+                                            };
+
+                                            currentEvents.push(newEvent);
+
+                                            localStorage.setItem("eventData", JSON.stringify(currentEvents));
+
+                                            buildDropDown();
+                                            displayData();
+
+
                                             }
                                             
                                         </code>
@@ -163,9 +411,13 @@
                                 <div class="text-center">
                                     <div class="h6">Have more questions?</div>
                                     <p class="mb-4">
-                                        
+                                        Get in touch through my website!
                                     </p>
-                                    <div class="h6">Contact Me!</div>
+                                    <div class="d-flex justify-content-center">
+                                        <a type="button" href="https://helloshyann.com/#contact" target="_blank" class="btn hvr-pulse-grow btn-outline-dark">
+                                            Contact Me
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
