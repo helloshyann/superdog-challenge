@@ -1,1 +1,1 @@
-# js-template
+# SuperDog Coding Challenge
